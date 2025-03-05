@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <nav id="navbar">
+        <header>Sensor-Based Push-up and Sit-up Counter System</header>
+        <ul>
+            <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+            <li>
+                <a class="nav-link" href="#Features">Features</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Prerequisites">Prerequisites</a>
+            </li>
+            <li><a class="nav-link" href="#Installation">Installation</a></li>
+            <li><a class="nav-link" href="#How_to_use">How to use</a></li>
+            <li>
+                <a class="nav-link" href="#Important_Notes">Important Notes</a>
+            </li>
+            <li><a class="nav-link" href="#Information">Information</a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="Introduction">
+            <header>Introduction</header>
+            <article>
+                <p>
+                    The sensor-based push-up and sit-up counter system is designed to accurately count and analyze physical movements during workouts. This system utilizes sensors attached to the user's body and sends data to a central server for real-time feedback and tracking.
+                </p>
+                <p>
+                    The system includes two main parts: the client-side devices attached to the user (for push-ups and sit-ups) and a server that receives and processes the data. The sensors used are MPU-based, which detect orientation and movement, while the communication is handled using BLE (Bluetooth Low Energy).
+                </p>
+                <ul>
+                    <li>
+                        The primary objective of the system is to help users track their workout performance accurately, ensuring that each exercise is performed correctly.
+                    </li>
+                    <li>
+                        The system also provides feedback to the user regarding their posture and execution, promoting proper form and reducing the risk of injury.
+                    </li>
+                    <li>
+                        Data collected from the sensors is stored and can be reviewed for progress tracking and statistical analysis.
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="Features">
+            <header>Features</header>
+            <article>
+                <p>The following are the features of the Sensor-Based Push-up and Sit-up Counter System:</p>
+
+                <ul>
+                    <li>Connects to the ESP32 server via BLE.</li>
+                    <li>Calculates correct and incorrect push-up/sit-up movements.</li>
+                    <li>Sends feedback to the ESP32 server based on the movements.</li>
+                    <li>Saves the results (name, mode, correct/incorrect movement, time) into a CSV file.</li>
+                    <li>Resets the ESP32 server and deletes the CSV data.</li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="Prerequisites">
+            <header>Prerequisites</header>
+            <article>
+                <p>Before running this project, make sure you have all of the following installed so that the project can run properly:</p>
+
+                <ul>
+                    <li>Python 3.x</li>
+                    <li>Django</li>
+                    <li>Bleak</li>
+                    <li>Pandas</li>
+                    <li>bleak</li>
+                    <li>asgiref</li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="Installation">
+            <header>Installation</header>
+            <article>
+                <p>To ensure the proper functioning of the project, it's essential to first install the necessary prerequisites and follow the setup steps carefully. This will enable all components to work seamlessly together. Below are the detailed instructions to help you set up the system:.</p>
+                <ol>
+                    <li>Clone the repository:</li>
+                    <code>git clone https://github.com/AndriSatia/Tugas_Akhir</code>
+                    <li>Create a virtual environment and activate it:</li>
+                    <code>python -m venv env</code>
+                    <code>source env/bin/activate</code>
+                    <li>Install dependencies:</li>
+                    <code>pip install django pandas bleak</code>
+                    <li>Migrate database:</li>
+                    <code>python manage.py migrate</code>
+                    <li>Run the server:</li>
+                    <code>python manage.py runserver</code>
+                </ol>
+            </article>
+        </section>
+        <section class="main-section" id="How_to_use">
+            <header>How to Use</header>
+            <article>
+                <h3>Start the Server</h3>
+                <p>To run the Django server, use the following command:</p>
+                <code>python manage.py runserver</code>
+                <p>Then, open your browser and access the interface at:</p>
+                <code>http://localhost:8000</code>
+    
+                <h3>Pages</h3>
+                <ul>
+                    <li><strong>Connect BLE:</strong> Connect to the ESP32 server via Bluetooth.</li>
+                    <li><strong>Push-up Counter:</strong> Start counting push-ups.</li>
+                    <li><strong>Sit-up Counter:</strong> Start counting sit-ups.</li>
+                    <li><strong>History:</strong> View stored movement data in CSV.</li>
+                </ul>
+    
+                <h3>Data Management</h3>
+                <p>All movement data (correct/incorrect) is saved in the <code>data/history.csv</code> file. You can:</p>
+                <ul>
+                    <li><strong>Reset ESP32:</strong> Reset the ESP32 server via the interface.</li>
+                    <li><strong>Clear CSV:</strong> Delete all CSV data while retaining the header.</li>
+                </ul>
+    
+                <h3>API Endpoints</h3>
+                <ul>
+                    <li><strong>/connect_ble_view:</strong> Connect to the ESP32 device via BLE.</li>
+                    <li><strong>/get_counter:</strong> Get the current count of push-ups or sit-ups.</li>
+                    <li><strong>/reset_esp32_view:</strong> Reset the ESP32 server.</li>
+                    <li><strong>/add_data_to_csv:</strong> Add new data to the CSV file.</li>
+                    <li><strong>/clear_csv:</strong> Clear all data in the CSV, keeping the header.</li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="Important_Notes">
+            <header>Important Notes</header>
+            <article>
+                <p>This project is designed for internal use only and should only be edited by registered contributors. Please ensure the following key points are adhered to when using and modifying the system:</p>
+    
+                <h3>BLE Configuration</h3>
+                <p>The system connects to an ESP32 device using the MAC address:</p>
+                <code>34:B7:DA:F8:88:FA</code>
+                <p>You can change it according to your ESP32's address.</p>
+                
+                <p>The project relies on Bluetooth Low Energy (BLE) for communication. Make sure that your ESP32 is configured correctly and that the UUIDs for the BLE characteristics match between the ESP32 device and the code.</p>
+                <code>UUID: your-uuid-here</code>
+                
+                <h3>Installation Requirements</h3>
+                <p>Ensure that the <code>bleak</code> library is installed for BLE functionality:</p>
+                <code>pip install bleak</code>
+                <p>If you encounter any issues with the installation of bleak, use the following command:</p>
+                <code>pip install https://github.com/hbldh/bleak/archive/refs/heads/develop.zip</code>
+                
+                <h3>Device Configuration</h3>
+                <p>Before running the project, double-check that your BLE device is properly configured. Improper configurations may cause connection issues or unreliable performance.</p>
+            </article>
+        </section>
+        <section class="main-section" id="Information">
+            <header>Information</header>
+            <article>
+                <p>This project was created by Andri, Sabila, and Diva as a university capstone project. The three project creators are alumni of Telkom University. here is the LinkedIn profile link of the three:</p>
+                <ul>
+                    <li><a href="https://id.linkedin.com/in/andri-satia-permana-9bbb032a7">Andri Satia Permana</a></li>
+                    <li><a href="https://id.linkedin.com/in/sabila-hayyinun-jannah-5b4509271">Sabila Hayyinun Jannah</a></li>
+                    <li><a href="https://id.linkedin.com/in/diva-dhila-jasmine">Diva Dhila Jasmine</a></li>
+                </ul>
+                <p>
+                    To find out more about this project, from coding to more information, please visit the project's GitHub repository:
+                        <a href="https://github.com/AndriSatia/Tugas_Akhir.git" target="_blank">Sensor-Based Push-up and Sit-up Counter System GitHub Repository</a>
+                </p>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>
